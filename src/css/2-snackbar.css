@@ -1,3 +1,21 @@
-ul {
-    list-style: none;
+.form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 300px;
+  gap: 10px;
+}
+
+input[name='delay'] {
+  /* display: block; */
+  width: 300px;
+}
+
+fieldset {
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  /* gap: 10px; */
+  /* width: 300px; */
+  /* padding: 0; */
 }
