@@ -1,8 +1,8 @@
-import iziToast from "izitoast";
-import flatpickr from "flatpickr";
+import iziToast from 'izitoast';
+import flatpickr from 'flatpickr';
 
-import "flatpickr/dist/flatpickr.min.css";
-import "izitoast/dist/css/iziToast.min.css";
+import 'flatpickr/dist/flatpickr.min.css';
+import 'izitoast/dist/css/iziToast.min.css';
 
 const inputDate = document.querySelector('#datetime-picker');
 const startBtn = document.querySelector('button[data-start]');
@@ -11,10 +11,11 @@ const hour = document.querySelector('[data-hours]');
 const minute = document.querySelector('[data-minutes]');
 const second = document.querySelector('[data-seconds]');
 
-let timer = null;
+let countdownInterval = null;
 
 startBtn.addEventListener('click', onStart);
 startBtn.disabled = true;
+inputDate.disabled = false;
 
 
 const options = {
@@ -36,8 +37,9 @@ const options = {
 
 function onStart() {
     startBtn.disabled = true;
+    inputDate.disabled = true;
 
-    timer = setInterval(() => {
+    countdownInterval = setInterval(() => {
         const currentDate = new Date(inputDate.value);
         const remainder = currentDate - Date.now();
         const { days, hours, minutes, seconds } = convertMs(remainder);
@@ -50,7 +52,9 @@ function onStart() {
                 title: 'OK',
                 message: 'Time is over!',
             });
-            clearInterval(timer)
+            clearInterval(countdownInterval);
+            inputDate.disabled = false;
+
 
         }
 
@@ -79,7 +83,7 @@ function convertMs(ms) {
 };
 
 function addLeadingZero(value) {
-    return value.toString().padStart(2, "0");
+    return value.toString().padStart(2, '0');
 }
 
-flatpickr("#datetime-picker", options);
+flatpickr('#datetime-picker', options);
